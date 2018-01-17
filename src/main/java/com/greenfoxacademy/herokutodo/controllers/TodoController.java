@@ -22,6 +22,7 @@ public class TodoController {
   @RequestMapping(value = {"/", "/list"})
   public String list(Model model, @RequestParam(value = "isActive", required = false) boolean isActive){
     List<Todo> repoList = new ArrayList<>();
+    String title = "";
     repo.findAll().forEach(repoList::add);
     if (isActive){
       for (int i = 0; i < repoList.size(); i++) {
@@ -31,7 +32,8 @@ public class TodoController {
       }
     }
     model.addAttribute("repoList", repoList);
-    return "newtodo";
+    model.addAttribute("title", title);
+    return "home";
   }
 
  @GetMapping("/add")
@@ -64,6 +66,14 @@ public class TodoController {
     newTodo.setId(id);
     repo.save(newTodo);
     return new ModelAndView("redirect:/todo/");
+  }
+
+  @GetMapping("/search/{title}")
+  public String searchTitle(@PathVariable("title") String searchedTitle, Model model) {
+    List<Todo> repoList = new ArrayList<>();
+    repo.findAllByTitle(searchedTitle).forEach(repoList::add);
+    model.addAttribute("repoList", repoList);
+    return "home";
   }
 
 }

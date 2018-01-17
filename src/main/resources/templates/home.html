@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listing ToDos</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"/>
+    --><meta charset="utf-8" />
+</head>
+<body>
+<div class="col-md-4">
+<h1 class="text-uppercase">Todos for today:</h1>
+<form action="#" th:action="@{/todo/add}" method="get">
+    <input th:style="'color: white;'" class="btn btn-warning" value="Add new todo" type="submit"/>
+</form></div>
+<form action="#" th:action="@{/todo/search/} + ${title}" method="get">
+    <input type="text" th:placeholder="Search" th:field="${title}"/>
+    <input class="btn btn-danger" value="search" type="submit"/>
+</form>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>ACTION</th>
+        <th>URGENT</th>
+        <th>DONE</th>
+    </tr>
+    <td>
+        <tr th:each="todo: ${repoList}">
+        <td th:text="${todo.id}" />
+        <td th:text="${todo.title}" />
+        <td th:if="${todo.isUrgent}"><span class="glyphicon glyphicon-ok"></span></td>
+        <td th:unless="${todo.isUrgent}"><span class="glyphicon glyphicon-remove"></span></td>
+        <td th:if="${todo.isDone}"><span class="glyphicon glyphicon-ok"></span></td>
+        <td th:unless="${todo.isDone}"><span class="glyphicon glyphicon-remove"></span></td>
+        <td>
+            <form action="#" th:action="@{/todo/} + ${todo.id} + '/delete'" method="post">
+                <input class="btn btn-danger" value="Delete" type="submit"/>
+            </form>
+        </td>
+        <td>
+            <form action="#" th:action="@{/todo/} + ${todo.id} + '/edit'" method="get">
+                <input class="btn btn-primary" value="Edit" type="submit"/>
+            </form>
+        </td>
+        </tr>
+    </td>
+</table>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>
