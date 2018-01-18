@@ -1,7 +1,7 @@
 package com.greenfoxacademy.herokutodo;
 
-import com.greenfoxacademy.herokutodo.models.Assignee;
-import com.greenfoxacademy.herokutodo.models.Todo;
+import com.greenfoxacademy.herokutodo.models.entities.Assignee;
+import com.greenfoxacademy.herokutodo.models.entities.Todo;
 import com.greenfoxacademy.herokutodo.repositories.AssigneeRepository;
 import com.greenfoxacademy.herokutodo.repositories.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,13 @@ public class HerokutodoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repo.save(new Todo("I have to learn Object Relational Mapping"));
-		repo.save(new Todo("Finish first exercise"));
-		repo.save(new Todo("Understand mySQL better"));
-		assRepo.save(new Assignee("Kata", "kata@gmail.com"));
-		assRepo.save(new Assignee("Zsuzsa", "zsuzsi@cmail.com"));
+		Assignee assignee1 = new Assignee("Kata", "kata@gmail.com");
+		Assignee assignee2 = new Assignee("Zsuzsa", "zsuzsi@cmail.com");
+		assRepo.save(assignee1);
+		assRepo.save(assignee2);
+		repo.save(new Todo("I have to learn Object Relational Mapping", assignee1));
+		repo.save(new Todo("Finish first exercise", assignee1));
+		repo.save(new Todo("Understand mySQL better", assignee2));
+
 	}
 }

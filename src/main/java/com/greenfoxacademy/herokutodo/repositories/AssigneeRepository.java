@@ -1,6 +1,6 @@
 package com.greenfoxacademy.herokutodo.repositories;
 
-import com.greenfoxacademy.herokutodo.models.Assignee;
+import com.greenfoxacademy.herokutodo.models.entities.Assignee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

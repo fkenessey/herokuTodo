@@ -1,9 +1,11 @@
-package com.greenfoxacademy.herokutodo.models;
+package com.greenfoxacademy.herokutodo.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "assignees")
@@ -17,9 +19,11 @@ public class Assignee {
   private String name;
   private String email;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
-  private Todo todo;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "assignee")
+  //@OneToOne(fetch = FetchType.LAZY)
+  //@JoinColumn(name = "id")
+  private List<Todo> todos = new ArrayList<>();
+  //private Todo todo;
 
   public Assignee() {
   }
@@ -51,5 +55,13 @@ public class Assignee {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public List<Todo> getTodos() {
+    return todos;
+  }
+
+  public void setTodos(List<Todo> todos) {
+    this.todos = todos;
   }
 }

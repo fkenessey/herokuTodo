@@ -1,6 +1,6 @@
 package com.greenfoxacademy.herokutodo.controllers;
 
-import com.greenfoxacademy.herokutodo.models.Assignee;
+import com.greenfoxacademy.herokutodo.models.entities.Assignee;
 import com.greenfoxacademy.herokutodo.repositories.AssigneeRepository;
 import com.greenfoxacademy.herokutodo.repositories.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +77,7 @@ public class AssigneeController {
   @GetMapping("/{id}/todos")
   public String showTodos(@PathVariable("id") int id, Model model) {
     model.addAttribute("assignee", assRepo.findOne(id));
-    model.addAttribute("allocatedTodos", toDoRepository.findAllById(id));
+    model.addAttribute("allocatedTodos", toDoRepository.findAllByAssignee_Id(id));
     return "todosperassignee";
   }
 }

@@ -1,6 +1,6 @@
 package com.greenfoxacademy.herokutodo.repositories;
 
-import com.greenfoxacademy.herokutodo.models.Todo;
+import com.greenfoxacademy.herokutodo.models.entities.Todo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,10 @@ public interface ToDoRepository extends CrudRepository<Todo,Integer> {
  //by id
   List<Todo> findAllById(Integer searchedId);
 
-  //by assignee
+  //by assignee One-to-One
   List<Todo> findByAssignee(Integer searchedId);
+
+  //by assignee Many-toOne
+ List<Todo> findAllByAssignee_Id(Integer searchedId);
 
 }

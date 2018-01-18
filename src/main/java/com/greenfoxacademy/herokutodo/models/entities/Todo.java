@@ -1,4 +1,4 @@
-package com.greenfoxacademy.herokutodo.models;
+package com.greenfoxacademy.herokutodo.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,18 +18,20 @@ public class Todo {
   private boolean isUrgent;
   private boolean isDone;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  //@OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "assignee_id")
   private Assignee assignee;
 
   public Todo() {
   }
 
-  public Todo(String title) {
+  public Todo(String title, Assignee assignee) {
     this.id = id;
     this.title = title;
     this.isUrgent = false;
     this.isDone = false;
+    this.assignee = assignee;
   }
 
   public int getId() {
@@ -62,5 +64,29 @@ public class Todo {
 
   public void setIsDone(boolean done) {
     isDone = done;
+  }
+
+  public boolean isUrgent() {
+    return isUrgent;
+  }
+
+  public void setUrgent(boolean urgent) {
+    isUrgent = urgent;
+  }
+
+  public boolean isDone() {
+    return isDone;
+  }
+
+  public void setDone(boolean done) {
+    isDone = done;
+  }
+
+  public Assignee getAssignee() {
+    return assignee;
+  }
+
+  public void setAssignee(Assignee assignee) {
+    this.assignee = assignee;
   }
 }

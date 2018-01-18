@@ -1,6 +1,6 @@
 package com.greenfoxacademy.herokutodo.controllers;
 
-import com.greenfoxacademy.herokutodo.models.Todo;
+import com.greenfoxacademy.herokutodo.models.entities.Todo;
 import com.greenfoxacademy.herokutodo.repositories.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
