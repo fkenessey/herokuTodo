@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Listing ToDos</title>
-    <link rel="stylesheet" th:href="@{/style.css}" />
+    <title>Listing assignees</title>
+
     <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/style.css}" />
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"/>
     --><meta charset="utf-8" />
 </head>
@@ -20,18 +21,25 @@
 </form>
 <a th:href="@{/todo/assignee}">Assignee Home</a>
 <a th:href="@{/todo/}">Todo home</a>
-<table class="table">
+<table class="table-hover">
     <tr>
         <th>ID</th>
-        <th>ACTION</th>
-        <th>URGENT</th>
-        <th>DONE</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>SHOW TODOS</th>
+        <th>DELETE</th>
+        <th>EDIT</th>
     </tr>
     <td>
         <tr th:each="assignee: ${assList}">
             <td th:text="${assignee.id}" />
             <td th:text="${assignee.name}" />
             <td th:text="${assignee.email}" />
+            <td>
+                <form action="#" th:action="@{/todo/assignee/} + ${assignee.id} + '/todos'" method="get">
+                    <input class="btn btn-danger" value="Show todo-s" type="submit"/>
+                </form>
+            </td>
             <td>
                 <form action="#" th:action="@{/todo/assignee/} + ${assignee.id} + '/delete'" method="post">
                     <input class="btn btn-danger" value="Delete" type="submit"/>

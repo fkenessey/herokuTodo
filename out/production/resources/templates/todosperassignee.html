@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listing ToDos</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"/>
+    --><meta charset="utf-8" />
+</head>
+<body>
+<a th:href="@{/todo/assignee}">Assignee Home</a>
+<a th:href="@{/todo/}">Todo home</a>
+<table class="table-hover">
+    <tr>
+        <th>ASSIGNEE ID</th>
+        <th>ASSIGNEE NAME</th>
+        <th>ASSIGNEE EMAIL</th>
+    </tr>
+    <td th:object="${assignee}" th:text="*{id}" />
+    <td th:object="${assignee}" th:text="*{name}" />
+    <td th:object="${assignee}" th:text="*{email}" />
+    <td>..</td>
+    <tr>
+        <th>TODO ID</th>
+        <th>TODO TITLE</th>
+        <th>TODO URGENCY</th>
+        <th>TODO STATUS</th>
+    </tr>
+    <td>
+        <tr th:each="todos: ${allocatedTodos}">
+            <td th:text="${todos.id}" />
+            <td th:text="${todos.title}" />
+            <td th:if="${todos.isUrgent}"><span class="glyphicon glyphicon-ok"></span></td>
+            <td th:unless="${todos.isUrgent}"><span class="glyphicon glyphicon-remove"></span></td>
+            <td th:if="${todos.isDone}"><span class="glyphicon glyphicon-ok"></span></td>
+            <td th:unless="${todos.isDone}"><span class="glyphicon glyphicon-remove"></span></td>
+        </tr>
+    </td>
+</table>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

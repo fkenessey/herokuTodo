@@ -1,8 +1,8 @@
 package com.greenfoxacademy.herokutodo.controllers;
 
 import com.greenfoxacademy.herokutodo.models.Assignee;
-import com.greenfoxacademy.herokutodo.models.Todo;
 import com.greenfoxacademy.herokutodo.repositories.AssigneeRepository;
+import com.greenfoxacademy.herokutodo.repositories.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,8 @@ public class AssigneeController {
 
   @Autowired
   AssigneeRepository assRepo;
+  @Autowired
+  ToDoRepository toDoRepository;
 
   @GetMapping("")
   public String list(Model model){
@@ -70,5 +72,12 @@ public class AssigneeController {
     assRepo.findAllByEmail(searchedEmail).forEach(assList::add);
     model.addAttribute("assList", assList);
     return "assignee";
+  }
+
+  @GetMapping("/{id}/todos")
+  public String showTodos(@PathVariable("id") int id, Model model) {
+    model.addAttribute("assignee", assRepo.findOne(id));
+    model.addAttribute("allocatedTodos", toDoRepository.findAllById(id));
+    return "todosperassignee";
   }
 }

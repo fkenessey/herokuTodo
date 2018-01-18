@@ -15,4 +15,7 @@ public interface ToDoRepository extends CrudRepository<Todo,Integer> {
  //by id
   List<Todo> findAllById(Integer searchedId);
 
+  //by assignee
+  List<Todo> findByAssignee(Integer searchedId);
+
 }
