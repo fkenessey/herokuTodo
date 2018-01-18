@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listing ToDos</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"/>
+    --><meta charset="utf-8" />
+</head>
+<body>
+<div class="col-md-4">
+    <h1 class="text-uppercase">List of assignees</h1>
+    <form action="#" th:action="@{/todo/assignee/add}" method="get">
+        <input th:style="'color: white;'" class="btn btn-warning" value="Add new todo" type="submit"/>
+    </form></div>
+<form action="#" th:action="@{/todo/assignee/search}" method="get">
+    <input type="text" name="name" placeholder="Search name"/>
+    <input type="text" name="email" placeholder="Search email"/>
+    <input class="btn btn-danger" value="search" type="submit"/>
+</form>
+<a th:href="@{/todo/assignee}">Assignee Home</a>
+<a th:href="@{/todo/}">Todo home</a>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>ACTION</th>
+        <th>URGENT</th>
+        <th>DONE</th>
+    </tr>
+    <td>
+        <tr th:each="assignee: ${assList}">
+            <td th:text="${assignee.id}" />
+            <td th:text="${assignee.name}" />
+            <td th:text="${assignee.email}" />
+            <td>
+                <form action="#" th:action="@{/todo/assignee/} + ${assignee.id} + '/delete'" method="post">
+                    <input class="btn btn-danger" value="Delete" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{/todo/assignee/} + ${assignee.id} + '/edit'" method="get">
+                    <input class="btn btn-primary" value="Edit" type="submit"/>
+                </form>
+            </td>
+        </tr>
+    </td>
+</table>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

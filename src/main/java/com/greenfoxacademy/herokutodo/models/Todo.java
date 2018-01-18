@@ -5,8 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Entity
+@Table(name = "todos")
+@Getter
+@Setter
 public class Todo {
 
   @Id
@@ -15,6 +17,10 @@ public class Todo {
   private String title;
   private boolean isUrgent;
   private boolean isDone;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  private Assignee assignee;
 
   public Todo() {
   }

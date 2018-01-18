@@ -1,6 +1,5 @@
 package com.greenfoxacademy.herokutodo.controllers;
 
-
 import com.greenfoxacademy.herokutodo.models.Todo;
 import com.greenfoxacademy.herokutodo.repositories.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ public class TodoController {
   public String list(Model model, @RequestParam(value = "isActive", required = false) boolean isActive){
     List<Todo> repoList = new ArrayList<>();
     String title = "";
+    int id = 0;
     repo.findAll().forEach(repoList::add);
     if (isActive){
       for (int i = 0; i < repoList.size(); i++) {
@@ -33,6 +33,7 @@ public class TodoController {
     }
     model.addAttribute("repoList", repoList);
     model.addAttribute("title", title);
+    model.addAttribute("id", id);
     return "home";
   }
 
@@ -68,12 +69,12 @@ public class TodoController {
     return new ModelAndView("redirect:/todo/");
   }
 
-  @GetMapping("/search/{title}")
-  public String searchTitle(@PathVariable("title") String searchedTitle, Model model) {
+  @GetMapping("/search")
+  public String searchTitle(@RequestParam("title") String searchedTitle, @RequestParam("id") Integer searchedId, Model model) {
     List<Todo> repoList = new ArrayList<>();
     repo.findAllByTitle(searchedTitle).forEach(repoList::add);
+    repo.findAllById(searchedId).forEach(repoList::add);
     model.addAttribute("repoList", repoList);
     return "home";
   }
-
 }

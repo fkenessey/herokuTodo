@@ -12,4 +12,7 @@ public interface ToDoRepository extends CrudRepository<Todo,Integer> {
   //by title
  List<Todo> findAllByTitle(String searchedTitle);
 
+ //by id
+  List<Todo> findAllById(Integer searchedId);
+
 }

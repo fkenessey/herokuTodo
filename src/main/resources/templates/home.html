@@ -13,10 +13,13 @@
 <form action="#" th:action="@{/todo/add}" method="get">
     <input th:style="'color: white;'" class="btn btn-warning" value="Add new todo" type="submit"/>
 </form></div>
-<form action="#" th:action="@{/todo/search/} + ${title}" method="get">
-    <input type="text" th:placeholder="Search" th:field="${title}"/>
+<form action="#" th:action="@{/todo/search}" method="get">
+    <input type="text" name="title" placeholder="Search title"/>
+    <input type="text" name="id" placeholder="Search id"/>
     <input class="btn btn-danger" value="search" type="submit"/>
 </form>
+<a th:href="@{/todo/assignee}" method="get">List of assignees</a>
+<a th:href="@{/todo/}">Home</a>
 <table class="table">
     <tr>
         <th>ID</th>
