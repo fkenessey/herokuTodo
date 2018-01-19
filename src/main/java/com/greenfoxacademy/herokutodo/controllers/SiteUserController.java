@@ -34,7 +34,7 @@ public class SiteUserController {
     if (registeredUser.size() == 0) {
       return "redirect:/login/create";
     } else if (registeredUser.get(0).getUserPassword().equals(loginSiteUser.getUserPassword())) {
-      return "redirect:/todo/";
+      return "redirect:/todo/?id=" + registeredUser.get(0).getId();
     } else if (registeredUser.get(0).getUserName().equals(loginSiteUser.getUserName())){
       return "redirect:/login/forgottenpassword";
     } else {

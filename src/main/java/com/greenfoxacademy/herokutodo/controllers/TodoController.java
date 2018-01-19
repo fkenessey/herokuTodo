@@ -18,19 +18,24 @@ public class TodoController {
   @Autowired
   ToDoRepository repo;
 
-  @RequestMapping(value = {"/", "/list"})
-  public String list(Model model, @RequestParam(value = "isActive", required = false) boolean isActive){
+  @GetMapping(value = {"/h", "/list"})
+  public String list(Model model){
     List<Todo> repoList = new ArrayList<>();
     String title = "";
     int id = 0;
     repo.findAll().forEach(repoList::add);
-    if (isActive){
-      for (int i = 0; i < repoList.size(); i++) {
-        if (repoList.get(i).getIsDone()){
-          repoList.remove(i);
-        }
-      }
-    }
+    model.addAttribute("repoList", repoList);
+    model.addAttribute("title", title);
+    model.addAttribute("id", id);
+    return "home";
+  }
+
+  @GetMapping(value = "/")
+  public String list(@RequestParam("id") Integer userId, Model model){
+    List<Todo> repoList = new ArrayList<>();
+    String title = "";
+    int id = 0;
+    repo.findAllByAssignee_Id(userId).forEach(repoList::add);
     model.addAttribute("repoList", repoList);
     model.addAttribute("title", title);
     model.addAttribute("id", id);
