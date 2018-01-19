@@ -22,7 +22,7 @@ public class SiteUserController {
   public String loginPage(Model model) {
     SiteUser loginSiteUser = new SiteUser();
     model.addAttribute("siteUser", loginSiteUser);
-    return "loginpage";
+    return "loginmap/loginpage";
   }
 
   @PostMapping("/login")
@@ -46,7 +46,7 @@ public class SiteUserController {
   public String createLogin(Model model) {
     SiteUser newSiteUser = new SiteUser();
     model.addAttribute("newSiteUser", newSiteUser);
-    return "createlogin";
+    return "loginmap/createlogin";
   }
 
   @PostMapping("/login/create")
