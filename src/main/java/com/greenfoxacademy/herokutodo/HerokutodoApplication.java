@@ -23,8 +23,8 @@ public class HerokutodoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Assignee assignee1 = new Assignee("Kata", "kata@gmail.com");
-		Assignee assignee2 = new Assignee("Zsuzsa", "zsuzsi@cmail.com");
+		Assignee assignee1 = new Assignee("Kata", "kata@gmail.com", "Kata123");
+		Assignee assignee2 = new Assignee("Zsuzsa", "zsuzsi@cmail.com", "Zsu987");
 		assRepo.save(assignee1);
 		assRepo.save(assignee2);
 		repo.save(new Todo("I have to learn Object Relational Mapping", assignee1));

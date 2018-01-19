@@ -14,4 +14,6 @@ public interface AssigneeRepository extends CrudRepository<Assignee,Integer> {
 
   //by email
   List<Assignee> findAllByEmail(String searchedEmail);
+
+  List<Assignee> findAllByUserName(String searchedUserName);
 }

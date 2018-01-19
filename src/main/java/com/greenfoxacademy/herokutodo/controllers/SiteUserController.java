@@ -1,7 +1,7 @@
 package com.greenfoxacademy.herokutodo.controllers;
 
-import com.greenfoxacademy.herokutodo.models.entities.SiteUser;
-import com.greenfoxacademy.herokutodo.repositories.SiteUserRepository;
+import com.greenfoxacademy.herokutodo.models.entities.Assignee;
+import com.greenfoxacademy.herokutodo.repositories.AssigneeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +16,18 @@ import java.util.List;
 public class SiteUserController {
 
   @Autowired
-  SiteUserRepository siteUserRepository;
+  AssigneeRepository siteUserRepository;
 
   @GetMapping("")
   public String loginPage(Model model) {
-    SiteUser loginSiteUser = new SiteUser();
+    Assignee loginSiteUser = new Assignee();
     model.addAttribute("siteUser", loginSiteUser);
     return "loginmap/loginpage";
   }
 
   @PostMapping("/login")
-  public String checkLogin(@ModelAttribute("siteUser") SiteUser loginSiteUser, Model model) {
-    List<SiteUser> registeredUser = new ArrayList<>();
+  public String checkLogin(@ModelAttribute("siteUser") Assignee loginSiteUser, Model model) {
+    List<Assignee> registeredUser = new ArrayList<>();
 
     siteUserRepository.findAllByUserName(loginSiteUser.getUserName()).forEach(registeredUser::add);
 
@@ -44,14 +44,14 @@ public class SiteUserController {
 
   @GetMapping("/login/create")
   public String createLogin(Model model) {
-    SiteUser newSiteUser = new SiteUser();
+    Assignee newSiteUser = new Assignee();
     model.addAttribute("newSiteUser", newSiteUser);
     return "loginmap/createlogin";
   }
 
   @PostMapping("/login/create")
-  public String createLogin(@ModelAttribute("newSiteUser") SiteUser newSiteUser) {
-    List<SiteUser> checkList = new ArrayList<>();
+  public String createLogin(@ModelAttribute("newSiteUser") Assignee newSiteUser) {
+    List<Assignee> checkList = new ArrayList<>();
     siteUserRepository.findAllByUserName(newSiteUser.getUserName()).forEach(checkList::add);
     if (checkList.size() == 0) {
       siteUserRepository.save(newSiteUser);

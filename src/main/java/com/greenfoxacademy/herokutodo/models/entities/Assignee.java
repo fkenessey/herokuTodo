@@ -18,6 +18,10 @@ public class Assignee {
   private int id;
   private String name;
   private String email;
+  private String userName;
+  private String userPassword;
+  private boolean checkedIn;
+  private boolean topUser;
 
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "assignee")
   //@OneToOne(fetch = FetchType.LAZY)
@@ -28,9 +32,10 @@ public class Assignee {
   public Assignee() {
   }
 
-  public Assignee(String name, String email) {
-    this.name = name;
+  public Assignee(String userName, String email, String userPassword) {
+    this.userName = userName;
     this.email = email;
+    this.userPassword = userPassword;
   }
 
   public int getId() {
@@ -63,5 +68,37 @@ public class Assignee {
 
   public void setTodos(List<Todo> todos) {
     this.todos = todos;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getUserPassword() {
+    return userPassword;
+  }
+
+  public void setUserPassword(String userPassword) {
+    this.userPassword = userPassword;
+  }
+
+  public boolean isCheckedIn() {
+    return checkedIn;
+  }
+
+  public void setCheckedIn(boolean checkedIn) {
+    this.checkedIn = checkedIn;
+  }
+
+  public boolean isTopUser() {
+    return topUser;
+  }
+
+  public void setTopUser(boolean topUser) {
+    this.topUser = topUser;
   }
 }
