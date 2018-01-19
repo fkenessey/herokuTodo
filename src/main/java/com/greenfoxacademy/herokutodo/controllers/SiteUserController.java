@@ -51,7 +51,18 @@ public class SiteUserController {
 
   @PostMapping("/login/create")
   public String createLogin(@ModelAttribute("newSiteUser") SiteUser newSiteUser) {
-    siteUserRepository.save(newSiteUser);
-    return "redirect:/todo/";
+    List<SiteUser> checkList = new ArrayList<>();
+    siteUserRepository.findAllByUserName(newSiteUser.getUserName()).forEach(checkList::add);
+    if (checkList.size() == 0) {
+      siteUserRepository.save(newSiteUser);
+      return "redirect:/todo/";
+    } else {
+      return "redirect:/login/forgottenpassword";
+    }
+  }
+
+  @GetMapping("/login/forgottenpassword")
+  public String forgottenLogin() {
+    return "loginmap/forgottenlogin";
   }
 }

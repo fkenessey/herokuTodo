@@ -16,6 +16,8 @@ public class SiteUser {
   private int id;
   private String userName;
   private String userPassword;
+  private boolean checkedIn;
+  private boolean topUser;
 
   public SiteUser() {
   }
@@ -47,5 +49,21 @@ public class SiteUser {
 
   public void setUserPassword(String userPassword) {
     this.userPassword = userPassword;
+  }
+
+  public boolean isCheckedIn() {
+    return checkedIn;
+  }
+
+  public void setCheckedIn(boolean checkedIn) {
+    this.checkedIn = checkedIn;
+  }
+
+  public boolean isTopUser() {
+    return topUser;
+  }
+
+  public void setTopUser(boolean topUser) {
+    this.topUser = topUser;
   }
 }
