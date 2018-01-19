@@ -8,6 +8,17 @@
     --><meta charset="utf-8" />
 </head>
 <body>
-Create login
+
+<h1 class="text-uppercase">Creating new user</h1>
+
+<form action="#" th:action="@{/login/create}" th:object="${newSiteUser}" method="post">
+    <input type="text" placeholder="enter username" th:field="*{userName}"/>
+    <input type="text" placeholder="enter username" th:field="*{userPassword}"/>
+    <input class="btn btn-danger" value="Login" type="submit"/>
+</form>
+
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
 </body>
 </html>

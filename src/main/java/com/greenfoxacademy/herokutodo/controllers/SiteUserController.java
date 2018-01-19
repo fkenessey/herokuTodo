@@ -32,11 +32,26 @@ public class SiteUserController {
     siteUserRepository.findAllByUserName(loginSiteUser.getUserName()).forEach(registeredUser::add);
 
     if (registeredUser.size() == 0) {
-      return "createlogin";
+      return "redirect:/login/create";
     } else if (registeredUser.get(0).getUserPassword().equals(loginSiteUser.getUserPassword())) {
-      return "home";
+      return "redirect:/todo/";
+    } else if (registeredUser.get(0).getUserName().equals(loginSiteUser.getUserName())){
+      return "redirect:/login/forgottenpassword";
     } else {
-      return "forgottenlogin";
+      return "redirect:/login/create";
     }
+  }
+
+  @GetMapping("/login/create")
+  public String createLogin(Model model) {
+    SiteUser newSiteUser = new SiteUser();
+    model.addAttribute("newSiteUser", newSiteUser);
+    return "createlogin";
+  }
+
+  @PostMapping("/login/create")
+  public String createLogin(@ModelAttribute("newSiteUser") SiteUser newSiteUser) {
+    siteUserRepository.save(newSiteUser);
+    return "redirect:/todo/";
   }
 }
