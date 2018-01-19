@@ -24,6 +24,7 @@
     <tr>
         <th>ID</th>
         <th>ACTION</th>
+        <th>ASSIGNEE</th>
         <th>URGENT</th>
         <th>DONE</th>
         <th>DELETE</th>
@@ -33,6 +34,8 @@
         <tr th:each="todo: ${repoList}">
         <td th:text="${todo.id}" />
         <td th:text="${todo.title}" />
+        <td th:text="${todo.assignee.name}" />
+        <td th:text="${todo.createdAtString}" />
         <td th:if="${todo.isUrgent}"><span class="glyphicon glyphicon-ok"></span></td>
         <td th:unless="${todo.isUrgent}"><span class="glyphicon glyphicon-remove"></span></td>
         <td th:if="${todo.isDone}"><span class="glyphicon glyphicon-ok"></span></td>

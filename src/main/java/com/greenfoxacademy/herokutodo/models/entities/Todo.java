@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "todos")
@@ -17,6 +19,11 @@ public class Todo {
   private String title;
   private boolean isUrgent;
   private boolean isDone;
+
+  /*@Temporal(TemporalType.TIMESTAMP)
+  private Date createdAt;
+  private String createdAtString = String.valueOf(createdAt);*/
+  private String createdAtString = String.valueOf(LocalDate.now());
 
   @ManyToOne(fetch = FetchType.EAGER)
   //@OneToOne(fetch = FetchType.LAZY)
@@ -32,6 +39,7 @@ public class Todo {
     this.isUrgent = false;
     this.isDone = false;
     this.assignee = assignee;
+    this.createdAtString = createdAtString;
   }
 
   public int getId() {
@@ -88,5 +96,13 @@ public class Todo {
 
   public void setAssignee(Assignee assignee) {
     this.assignee = assignee;
+  }
+
+  public String getCreatedAtString() {
+    return createdAtString;
+  }
+
+  public void setCreatedAtString(String createdAtString) {
+    this.createdAtString = createdAtString;
   }
 }
